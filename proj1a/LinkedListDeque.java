@@ -115,7 +115,7 @@ public class LinkedListDeque<T> {
     /**
      * same as above iterative method, this time applying recursive version.
      */
-    public T getRecursive(int index, TNode curr){
+    private T getRecursive(int index, TNode curr){
         if(index == 0){
             return curr.item;
         }
@@ -124,24 +124,8 @@ public class LinkedListDeque<T> {
     /**
      * overload method?
      */
-    public T getRecursive(int index){
+    private T getRecursive(int index){
         return getRecursive(index, sentinel.next);
     }
-    /**
-     * create a deep copy of others
-     */
-
-    public LinkedListDeque(LinkedListDeque other){
-        sentinel = new TNode(null, null, null);
-        sentinel.prev =sentinel;
-        sentinel.next = sentinel;
-        size =0;
-        for (int i =0; i < other.size(); i++){
-            addLast((T) other.get(i));
-        }
-    }
-
-
-
 
 }
