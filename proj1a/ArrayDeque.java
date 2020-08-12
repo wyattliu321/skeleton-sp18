@@ -58,15 +58,14 @@ public class ArrayDeque<T> {
      */
     private void resize(int capacity) {
         T[] newDeque = (T[]) new Object[capacity];
-        int oldIndex = plusOne(nextFirst); // the index of the first item in original deque
-        for (int newIndex = 0; newIndex < size; newIndex++) {
-            newDeque[newIndex] = items[oldIndex];
-            oldIndex = plusOne(oldIndex);
-        }
+        int OrigHead = plusOne(nextFirst);
+        int r = items.length - OrigHead;
+        System.arraycopy(items, OrigHead, newDeque, 0, r);
+        System.arraycopy(items,0, newDeque, r, OrigHead);
+
         items = newDeque;
         nextFirst = capacity - 1; // since the new deque is starting from true 0 index.
         nextLast = size;
-
     }
 
     /**
@@ -178,47 +177,6 @@ public class ArrayDeque<T> {
         int start = plusOne(nextFirst);
         return items[(start + index) % items.length];
     }
-
-    /**
-     * Create a deep copy of other.
-     */
-    public ArrayDeque(ArrayDeque other) {
-        items = (T[]) new Object[other.size];
-        nextFirst = other.nextFirst;
-        nextLast = other.nextLast;
-        size = other.size;
-
-        System.arraycopy(other.items, 0, items, 0, other.size);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
