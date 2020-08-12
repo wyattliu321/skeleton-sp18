@@ -22,6 +22,10 @@ public class ArrayDeque<T> {
         size = 0;
     }
 
+    public int size(){
+        return size;
+    }
+
     /**
      * Return true if deque is full, false otherwise.
      */
@@ -57,15 +61,21 @@ public class ArrayDeque<T> {
      * Resize the deque.
      */
     private void resize(int capacity) {
-        T[] newDeque = (T[]) new Object[capacity];
+        T[] newitems = (T[]) new Object[capacity];
+        /**
+         * for (int newIndex = 0; newIndex<size; newIndex ++){
+         *             newitems[newIndex] = items[OrigHead];
+         *             OrigHead = plusOne(OrigHead);
+         *         }
+         */
         int OrigHead = plusOne(nextFirst);
         int r = items.length - OrigHead;
-        System.arraycopy(items, OrigHead, newDeque, 0, r);
-        System.arraycopy(items,0, newDeque, r, OrigHead);
-
-        items = newDeque;
-        nextFirst = capacity - 1; // since the new deque is starting from true 0 index.
+        System.arraycopy(items, OrigHead, newitems, 0, r);
+        System.arraycopy(items,0, newitems, r, OrigHead);
+        items = newitems;
+        nextFirst = capacity - 1;
         nextLast = size;
+
     }
 
     /**

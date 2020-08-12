@@ -129,7 +129,7 @@ public class LinkedListDeque<T> {
      * Same as get, but uses recursion
      * First, need a private helper method
      */
-    public T getRecurHelper(int index, TNode curr) {
+    private T getRecurHelper(int index, TNode curr) {
         if (index == 0) {
             return curr.item;
         }
