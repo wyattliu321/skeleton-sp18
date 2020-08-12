@@ -72,7 +72,7 @@ public class ArrayDeque<T> {
      * Upsize the deque.
      */
     private void upSize() {
-        resize(size * 2);
+        resize(items.length* 2);
     }
 
     /**
@@ -87,13 +87,6 @@ public class ArrayDeque<T> {
      */
     public boolean isEmpty() {
         return size == 0;
-    }
-
-    /**
-     * Return the number of items in the deque.
-     */
-    public int size() {
-        return size;
     }
 
     /**
