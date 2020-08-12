@@ -1,7 +1,6 @@
 /**
  * ArrayDeque
  * implemented in circular way
- * @author zangsy
  */
 
 public class ArrayDeque<T> {
@@ -62,16 +61,20 @@ public class ArrayDeque<T> {
      */
     private void resize(int capacity) {
         T[] newitems = (T[]) new Object[capacity];
-        /**
-         * for (int newIndex = 0; newIndex<size; newIndex ++){
-         *             newitems[newIndex] = items[OrigHead];
-         *             OrigHead = plusOne(OrigHead);
-         *         }
-         */
         int OrigHead = plusOne(nextFirst);
-        int r = items.length - OrigHead;
-        System.arraycopy(items, OrigHead, newitems, 0, r);
-        System.arraycopy(items,0, newitems, r, OrigHead);
+
+         for (int newIndex = 0; newIndex<size; newIndex ++){
+                      newitems[newIndex] = items[OrigHead];
+                      OrigHead = plusOne(OrigHead);
+         }
+
+
+        /**
+         *         int r = items.length - OrigHead;
+         *         System.arraycopy(items, OrigHead, newitems, 0, r);
+         *         System.arraycopy(items,0, newitems, r, OrigHead);
+         */
+
         items = newitems;
         nextFirst = capacity - 1;
         nextLast = size;
