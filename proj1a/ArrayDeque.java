@@ -1,12 +1,17 @@
+/**
+ * ArrayDeque
+ * implemented in a circular way
+ */
+
+
 public class ArrayDeque<T> {
     private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
-    private int initSize = 8;
 
     public ArrayDeque(){
-        T[] items = (T[]) new Object[initSize];
+        T[] items = (T[]) new Object[8];
         nextFirst = 0;
         nextLast = 1;
         size = 0;
@@ -27,12 +32,17 @@ public class ArrayDeque<T> {
     }
 
     public boolean isFull(){
-        return plusOne(nextFirst) == minusOne(nextLast);
+       return size == items.length;
+        /* return plusOne(nextFirst) == minusOne(nextLast); */
 
     }
 
     public boolean isSparse(){
         return items.length >= 16 && size < (items.length/4);
+    }
+
+    public int size(){
+        return size;
     }
 
     public void resize(int capacity){
@@ -57,15 +67,12 @@ public class ArrayDeque<T> {
 
     public void printDeque(){
         for(int i = plusOne(nextFirst); i!=nextLast ; i=plusOne(i)){
-            System.out.print(items[i]+" ");
+            System.out.print(items[i] + " ");
         }
         System.out.println();
     }
 
     public void addFirst(T item){
-        if (item == null){
-            throw new NullPointerException();
-        }
         if (isFull()){
             doubleCapacity();
         }
@@ -75,9 +82,6 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item){
-        if(item == null){
-            throw new NullPointerException();
-        }
         if (isFull()){
             doubleCapacity();
         }
