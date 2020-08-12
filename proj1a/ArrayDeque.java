@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.operations.Or;
+
 /**
  * ArrayDeque
  * implemented in a circular way
@@ -47,11 +49,18 @@ public class ArrayDeque<T> {
 
     public void resize(int capacity){
         T[] newitems = (T[]) new Object[capacity];
-        int n = items.length;
+        /**
+         *         int n = items.length;
+         *         int OrigHead = plusOne(nextFirst);
+         *         int r = items.length - OrigHead;
+         *         System.arraycopy(items, OrigHead, newitems, 0, r);
+         *         System.arraycopy(items,0, newitems, r, OrigHead);
+         */
         int OrigHead = plusOne(nextFirst);
-        int r = items.length - OrigHead;
-        System.arraycopy(items, OrigHead, newitems, 0, r);
-        System.arraycopy(items,0, newitems, r, OrigHead);
+        for (int newIndex = 0; newIndex<size; newIndex ++){
+            newitems[newIndex] = items[OrigHead];
+            OrigHead = plusOne(OrigHead);
+        }
         items = newitems;
         nextFirst = capacity - 1;
         nextLast = size;
